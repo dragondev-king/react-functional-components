@@ -1,0 +1,40 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "rules": {
+    "class-methods-use-this": 1,
+    "generator-star-spacing": 0,
+    "import/extensions": 1,
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "jsx-a11y/anchor-has-content": 1,
+    "jsx-a11y/no-static-element-interactions": 1,
+    "max-len": [1, { "code": 200 }],
+    "no-console": 1,
+    "no-mixed-operators": [2, { "allowSamePrecedence": true }],
+    "no-param-reassign": 1,
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+    "no-restricted-syntax": [2, "LabeledStatement", "WithStatement"],
+    "no-underscore-dangle": 1,
+    "no-unused-expressions": 0,
+    "no-unused-vars": [2, { "ignoreRestSiblings": true, "varsIgnorePattern": "[iI]gnored", "argsIgnorePattern": "^_" }],
+    "react/forbid-prop-types": [1, { "forbid": ["any", "array"], "checkContextTypes": true, "checkChildContextTypes": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-multi-comp": 1,
+    "react/prefer-es6-class": 1,
+    "react/prefer-stateless-function": 1,
+    "react/prop-types": 1,
+    "react/require-default-props": 1
+  }
+}
