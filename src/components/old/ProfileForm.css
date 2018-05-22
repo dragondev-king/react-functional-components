@@ -1,0 +1,39 @@
+.profileFormContainer {
+  padding: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.controllerContainer {
+  margin: 0 auto;
+  min-width: 16rem;
+}
+
+.profileCardContainer {
+  box-shadow: 0rem .5rem 1rem rgba(0,0,0,.3);
+  background-color: white;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  min-width: 16rem;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.nameSubContainer {
+  margin: auto 0.4rem;
+}
+
+.name {
+  margin: 0;
+}
+
+.complement {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: grey;
+}
