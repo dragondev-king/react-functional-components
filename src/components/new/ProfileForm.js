@@ -11,6 +11,7 @@ class ProfileForm extends Component {
     iconList: ['help'],
     iconIndex: 0,
     iconColor: '#ddd',
+    inputRef: null,
   }
 
   // Container components can access React's lifecycle methods (unlike stateless functional components)
@@ -21,11 +22,26 @@ class ProfileForm extends Component {
     });
   }
 
+  onInputBlur = () => {
+    this.state.inputRef.focus();
+  }
+
+  setInputRef = (input) => {
+    this.setState({ inputRef: input });
+  }
+
   getRandomColor = () => `hsl(${Math.floor(Math.random() * 10) * 36 % 360},100%,50%)`;
 
   handleNameChange = (name) => {
     this.setState({ name });
-    this.randomiseIcon();
+    if (name) {
+      this.randomiseIcon();
+    } else {
+      this.setState({
+        iconIndex: 0,
+        iconColor: '#ddd',
+      });
+    }
   }
 
   randomiseIcon = () => {
@@ -39,8 +55,18 @@ class ProfileForm extends Component {
   render() {
     return (
       <div className={styles.profileFormContainer}>
-        <Designer name={this.state.name} handleNameChange={this.handleNameChange} onRandomiseIconClick={this.randomiseIcon} />
-        <ProfileCard name={this.state.name} icon={this.state.iconList[this.state.iconIndex]} iconColor={this.state.iconColor} />
+        <Designer
+          name={this.state.name}
+          handleNameChange={this.handleNameChange}
+          onRandomiseIconClick={this.randomiseIcon}
+          onInputBlur={this.onInputBlur}
+          setInputRef={this.setInputRef}
+        />
+        <ProfileCard
+          name={this.state.name}
+          icon={this.state.iconList[this.state.iconIndex]}
+          iconColor={this.state.iconColor}
+        />
       </div>
     );
   }

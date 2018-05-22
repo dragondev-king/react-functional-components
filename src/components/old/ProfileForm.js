@@ -11,6 +11,7 @@ class ProfileForm extends Component {
     iconList: ['help'],
     iconIndex: 0,
     iconColor: '#ddd',
+    inputRef: null,
   }
 
   componentDidMount() {
@@ -19,11 +20,26 @@ class ProfileForm extends Component {
     });
   }
 
+  onInputBlur = () => {
+    this.state.inputRef.focus();
+  }
+
+  setInputRef = (input) => {
+    this.setState({ inputRef: input });
+  }
+
   getRandomColor = () => `hsl(${Math.floor(Math.random() * 10) * 36 % 360},100%,50%)`;
 
   handleNameChange = (name) => {
     this.setState({ name });
-    this.randomiseIcon();
+    if (name) {
+      this.randomiseIcon();
+    } else {
+      this.setState({
+        iconIndex: 0,
+        iconColor: '#ddd',
+      });
+    }
   }
 
   randomiseIcon = () => {
@@ -43,6 +59,8 @@ class ProfileForm extends Component {
             label="Name"
             value={this.state.name}
             onChange={this.handleNameChange}
+            innerRef={this.setInputRef}
+            onBlur={this.onInputBlur}
           />
           <Button icon="gesture" raised label="Randomise Icon" onClick={this.randomiseIcon} />
         </div>
