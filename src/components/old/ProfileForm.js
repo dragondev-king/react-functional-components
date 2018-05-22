@@ -8,9 +8,9 @@ import styles from './ProfileForm.css';
 class ProfileForm extends Component {
   state = {
     name: '',
-    iconList: ['person_outline'],
+    iconList: ['help'],
     iconIndex: 0,
-    iconColor: '#dddddd',
+    iconColor: '#ddd',
   }
 
   componentDidMount() {
@@ -33,17 +33,10 @@ class ProfileForm extends Component {
     });
   }
 
-  isNameAwesome = (name) => {
-    if (name === 'Rowan') {
-      return true;
-    }
-    return false;
-  }
-
   render() {
     return (
       <div className={styles.profileFormContainer}>
-        <div className={styles.controllerContainer}>
+        <div className={styles.designerContainer}>
           <Input
             autoFocus
             type="text"
@@ -51,15 +44,15 @@ class ProfileForm extends Component {
             value={this.state.name}
             onChange={this.handleNameChange}
           />
-          <Button icon="gesture" raised primary label="Randomise Icon" onClick={this.randomiseIcon} />
+          <Button icon="gesture" raised label="Randomise Icon" onClick={this.randomiseIcon} />
         </div>
         <div className={styles.profileCardContainer}>
           <div className={styles.nameContainer}>
             <Avatar style={{ backgroundColor: this.state.iconColor }} icon={this.state.iconList[this.state.iconIndex]} />
             <div className={styles.nameSubContainer}>
               <p className={styles.name}>{this.state.name}</p>
-              {this.state.name !== '' ?
-                <p className={styles.complement}>You have an {this.isNameAwesome(this.state.name) ? 'Awesome' : 'okay'} name!</p>
+              {this.state.name ?
+                <p className={styles.complement}>Has  very cool name!</p>
                 : <p className={styles.complement}>Waiting on name input...</p>
               }
             </div>

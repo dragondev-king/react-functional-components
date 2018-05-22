@@ -1,14 +1,3 @@
-.profileFormContainer {
-  padding: 4rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.designerContainer {
-  margin: 0 auto;
-  min-width: 16rem;
-}
-
 .profileCardContainer {
   box-shadow: 0rem .5rem 1rem rgba(0,0,0,.3);
   background-color: white;
