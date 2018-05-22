@@ -1,5 +1,6 @@
 export default {
   getIconList: () => Promise.resolve([
+    'help',
     'face',
     'adb',
     'sentiment_satisfied_alt',

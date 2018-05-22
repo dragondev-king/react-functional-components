@@ -1,0 +1,5 @@
+.profileFormContainer {
+  padding: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+}
