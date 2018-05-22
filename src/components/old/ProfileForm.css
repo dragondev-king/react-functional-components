@@ -1,11 +1,11 @@
 .profileFormContainer {
-  padding: 4rem;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
 }
 
 .designerContainer {
-  margin: 0 auto;
+  margin: 0 2rem;
   min-width: 16rem;
 }
 
@@ -14,7 +14,7 @@
   background-color: white;
   border-radius: 0.3rem;
   padding: 1rem;
-  margin: 1rem auto;
+  margin: 1rem 2rem;
   min-width: 16rem;
 }
 

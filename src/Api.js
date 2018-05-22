@@ -1,4 +1,5 @@
 export default {
+  // Mocking api fetch call
   getIconList: () => Promise.resolve([
     'help',
     'face',
