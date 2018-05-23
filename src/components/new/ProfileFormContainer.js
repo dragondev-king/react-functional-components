@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Api from '../../Api';
-import styles from './ProfileForm.css';
+import styles from './ProfileFormContainer.css';
 import ProfileCard from './profileCard/ProfileCard';
 import Designer from './designer/Designer';
 
 // Container components handle all state changes. They are interested in data and how it changes
-class ProfileForm extends Component {
+class ProfileFormContainer extends Component {
   state = {
     name: '',
     iconList: ['help'],
@@ -72,4 +72,4 @@ class ProfileForm extends Component {
   }
 }
 
-export default ProfileForm;
+export default ProfileFormContainer;

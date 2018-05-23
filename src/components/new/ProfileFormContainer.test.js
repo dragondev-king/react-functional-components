@@ -3,11 +3,11 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import { shallow } from 'enzyme';
-import ProfileForm from './ProfileForm';
+import ProfileFormContainer from './ProfileFormContainer';
 
 chai.use(chaiEnzyme());
 
-describe('ProfileForm', () => {
+describe('ProfileFormContainer', () => {
   let wrapper;
   let setStateStub;
   let mathStub;
@@ -21,8 +21,8 @@ describe('ProfileForm', () => {
   // Seeing as this is a container component, instead of testing the component by interacting with the UI, we unit test the functions inside the component directly
   it('randomiseIcon sets state for iconIndex and iconColor', () => {
     mathStub = sinon.stub(Math, 'random').returns(0);
-    setStateStub = sinon.stub(ProfileForm.prototype, 'setState');
-    wrapper = shallow(<ProfileForm />);
+    setStateStub = sinon.stub(ProfileFormContainer.prototype, 'setState');
+    wrapper = shallow(<ProfileFormContainer />);
 
     expect(setStateStub.called).to.be.false;
     // This test no longer interacts with the view, it now directly calls the function being tested
