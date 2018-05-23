@@ -49,11 +49,20 @@ class ProfileForm extends Component {
     });
   }
 
+  renderComplement = () => {
+    let complement = 'Waiting on name...';
+    if (this.state.name) {
+      complement = 'Has a very cool name!';
+    }
+    return <p id="profileCardComplement" className={styles.complement}>{complement}</p>;
+  };
+
   render() {
     return (
       <div className={styles.profileFormContainer}>
         <div className={styles.designerContainer}>
           <Input
+            id="designerInput"
             autoFocus
             type="text"
             label="Name"
@@ -62,17 +71,20 @@ class ProfileForm extends Component {
             innerRef={this.setInputRef}
             onBlur={this.onInputBlur}
           />
-          <Button icon="gesture" raised label="Randomise Icon" onClick={this.randomiseIcon} />
+          <Button
+            id="randomiseIconButton"
+            icon="gesture"
+            raised
+            label="Randomise Icon"
+            onClick={this.randomiseIcon}
+          />
         </div>
         <div className={styles.profileCardContainer}>
           <div className={styles.nameContainer}>
-            <Avatar style={{ backgroundColor: this.state.iconColor }} icon={this.state.iconList[this.state.iconIndex]} />
+            <Avatar id="profileCardIcon" style={{ backgroundColor: this.state.iconColor }} icon={this.state.iconList[this.state.iconIndex]} />
             <div className={styles.nameSubContainer}>
-              <p className={styles.name}>{this.state.name}</p>
-              {this.state.name ?
-                <p className={styles.complement}>Has  very cool name!</p>
-                : <p className={styles.complement}>Waiting on name input...</p>
-              }
+              <p id="profileCardName" className={styles.name}>{this.state.name}</p>
+              {this.renderComplement()}
             </div>
           </div>
         </div>
