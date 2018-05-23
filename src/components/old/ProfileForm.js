@@ -10,7 +10,7 @@ class ProfileForm extends Component {
     name: '',
     iconList: ['help'],
     iconIndex: 0,
-    iconColor: '#ddd',
+    iconColor: 'lightgrey',
     inputRef: null,
   }
 
@@ -37,7 +37,7 @@ class ProfileForm extends Component {
     } else {
       this.setState({
         iconIndex: 0,
-        iconColor: '#ddd',
+        iconColor: 'lightgrey',
       });
     }
   }
@@ -50,7 +50,7 @@ class ProfileForm extends Component {
   }
 
   renderComplement = () => {
-    let complement = 'Waiting on name...';
+    let complement = 'Missing name...';
     if (this.state.name) {
       complement = 'Has a very cool name!';
     }

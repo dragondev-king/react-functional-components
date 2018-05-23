@@ -10,7 +10,7 @@ const ProfileCard = ({ name, icon, iconColor }) => {
   // Stateless functional components can include functions inside them as long as they are only for presentational logic
   // Arguably this could be refactored into its own stateless functional component
   const renderComplement = () => {
-    let complement = 'Waiting on name...';
+    let complement = 'Missing name...';
     if (name) {
       complement = 'Has a very cool name!';
     }
@@ -34,14 +34,13 @@ const ProfileCard = ({ name, icon, iconColor }) => {
 // By defining prop types and naming props appropriately it should be clear what each prop is for
 ProfileCard.propTypes = {
   name: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.string.isRequired,
   iconColor: PropTypes.string,
 };
 
 ProfileCard.defaultProps = {
   name: '',
-  icon: 'help',
-  iconColor: '#ddd',
+  iconColor: 'lightgrey',
 };
 
 export default ProfileCard;

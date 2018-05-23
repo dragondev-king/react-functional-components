@@ -10,7 +10,7 @@ class ProfileFormContainer extends Component {
     name: '',
     iconList: ['help'],
     iconIndex: 0,
-    iconColor: '#ddd',
+    iconColor: 'lightgrey',
     inputRef: null,
   }
 
@@ -39,7 +39,7 @@ class ProfileFormContainer extends Component {
     } else {
       this.setState({
         iconIndex: 0,
-        iconColor: '#ddd',
+        iconColor: 'lightgrey',
       });
     }
   }
