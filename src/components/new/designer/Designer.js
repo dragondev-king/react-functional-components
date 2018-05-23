@@ -11,6 +11,7 @@ import styles from './Designer.css';
 const Designer = ({ name, onRandomiseIconClick, handleNameChange, onInputBlur, setInputRef }) => (
   <div className={styles.designerContainer}>
     <Input
+      id="designerInput"
       autoFocus
       type="text"
       label="Name"
@@ -22,6 +23,7 @@ const Designer = ({ name, onRandomiseIconClick, handleNameChange, onInputBlur, s
     {/* This button has no idea what onRandomiseIconClick does.
     If the function implementation changes in the future this button doesn't have strict ties to the logic and will not be affected */}
     <Button
+      id="randomiseIconButton"
       icon="gesture"
       raised
       label="Randomise Icon"

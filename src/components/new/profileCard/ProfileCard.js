@@ -8,20 +8,21 @@ import styles from './ProfileCard.css';
 // Everything that can change is handled in the a controller component which passes those values as props
 const ProfileCard = ({ name, icon, iconColor }) => {
   // Stateless functional components can include functions inside them as long as they are only for presentational logic
+  // Arguably this could be refactored into its own stateless functional component
   const renderComplement = () => {
     let complement = 'Waiting on name...';
     if (name) {
       complement = 'Has a very cool name!';
     }
-    return <p className={styles.complement}>{complement}</p>;
+    return <p id="profileCardComplement" className={styles.complement}>{complement}</p>;
   };
 
   return (
     <div className={styles.profileCardContainer}>
       <div className={styles.nameContainer}>
-        <Avatar style={{ backgroundColor: iconColor }} icon={icon} />
+        <Avatar id="profileCardIcon" style={{ backgroundColor: iconColor }} icon={icon} />
         <div className={styles.nameSubContainer}>
-          <p className={styles.name}>{name}</p>
+          <p id="profileCardName" className={styles.name}>{name}</p>
           {renderComplement()}
         </div>
       </div>
