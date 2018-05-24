@@ -97,7 +97,8 @@ Finally there is the render logic which has all the elements/components for the 
   }
 ```
 Which should look something like this:
-![Profile Form Screenshot](screenshots/ProfileFormScreenshot.png?raw=true "Profile Form Screenshot")
+
+[Profile Form Screenshot](screenshots/ProfileFormScreenshot.png?raw=true "Profile Form Screenshot")
 
 While this single component has everything working as intended, it isn't reusable. For instance we couldn't realistically pick this component up and use it in another project with a different purpose. It is too heavily tied to the context of this app.
 However it is possible that the profile card is something that could be reused across different apps. To do this we would need to refactor it out to it's own component. Which is exactly what we are going to do!
