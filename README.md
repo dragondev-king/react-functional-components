@@ -18,7 +18,7 @@ It is not intended to be a complete project. It is instead inteded to highlight 
 While it is entirely possible to create a React app in a single component, the general goal is to reduce components to a single purpose. By doing so they will be separating concerns, making them more reusable, and easier to test. This example project will be highlighting how a large component with both business and presentational logic can be divided into container components (whose job is to handle data and provide it to other components) and presentational components (stateless functional components which are only concerened with how this are displayed).
 
 To start lets look at the first part of the old ProfileForm component which has been writen to contain the entire app as a single component.
-```
+```javascript
 class ProfileForm extends React.Component {
   state = {
     name: '',
@@ -31,7 +31,7 @@ class ProfileForm extends React.Component {
  As we can see it is a class which extends a React component and it holds a few state variables with default values.
  
  It has a React lifecycle function which makes an api call then changes the state based on the result.
-```
+```javascript
   componentDidMount() {
     Api.getIconList().then((iconList) => {
       this.setState({ iconList });
@@ -39,7 +39,7 @@ class ProfileForm extends React.Component {
   }
 ```
 And other functions which have state changing logic as well as rendering logic.
-```
+```javascript
   randomiseIcon = () => {
     this.setState({
       iconIndex: Math.floor(Math.random() * this.state.iconList.length),
@@ -56,7 +56,7 @@ And other functions which have state changing logic as well as rendering logic.
   };
 ```
 Finally there is the render logic which has all the elements/components for the whole app.
-```
+```javascript
   render() {
     return (
       <div className={styles.profileFormContainer}>
@@ -104,7 +104,7 @@ While this single component has everything working as intended, it isn't reusabl
 However it is possible that the profile card is something that could be reused across different apps. To do this we would need to refactor it out to it's own component. Which is exactly what we are going to do!
 
 To start we create a new component `ProfileCard.js` and just with a normal component we import `React` However instead of importing `component` from React and defining a class like so:
-```
+```javascript
 import React, { component } from 'react';
 
 class ProfileCard extends component {
@@ -112,7 +112,7 @@ class ProfileCard extends component {
 }
 ```
 We can instead create ProfileCard as a stateless functional component. Like this:
-```
+```javascript
 import React from 'react';
 
 const ProfileCard = () => {
@@ -120,7 +120,7 @@ const ProfileCard = () => {
 }
 ```
 While these look quite similar there are some big differences. One is a React component which is capable of maintaining state and accessing React lifecycle functions. And the other is simply a function which takes in an input (in this case props) and then returns some element(s). This ProfileCard component is only interested in inputs for its name, its icon and the colour of the icon. Here we use object destructuring on the prop object to get the props:
-```
+```javascript
 const ProfileCard = ({ name, icon, iconColor }) => {
   ...
 }
@@ -128,7 +128,7 @@ const ProfileCard = ({ name, icon, iconColor }) => {
 Now instead of accessing the props as we usually would in a regular React component like `this.props.name` we instead have a variable `name` that we can access directly.
 
 After moving over the rendering logic/styles and refactoring the state object to props. We now have a working stateless functional component:
-```
+```javascript
 const ProfileCard = ({ name, icon, iconColor }) => {
   const renderComplement = () => {
     let complement = 'Missing name...';
@@ -154,7 +154,7 @@ const ProfileCard = ({ name, icon, iconColor }) => {
 As we can see there is a function `renderComplement` within this stateless functional component. It's important to note that it is totally fine to include functions like these as long as they are only used for presentational logic. However with that being said it would arguably be more appropriate to have the `renderComplement` function refactored into its own stateess functional component. But just for this example we will leave it as is.
 
 Now just before we start using this function elsewhere we should define the prop contract with any other component that wants to use this one. To do so we `import PropTypes from 'prop-types'` and then define the propTypes for this component:
-```
+```javascript
 ProfileCard.propTypes = {
   name: PropTypes.string,
   icon: PropTypes.string.isRequired,
@@ -166,20 +166,20 @@ These propTypes behave exactly as they would for a normal component; they define
 In this case all 3 of our props are `strings` and only the `icon` prop is required.
 
 Seeing as `name` and `iconColor` are not required we need to define what their defaults are in the event that they are not provided.
-```
+```javascript
 ProfileCard.defaultProps = {
   name: '',
   iconColor: 'grey',
 };
 ```
 Now all we have to do is export the new component
-```
+```javascript
 export default ProfileCard;
 ```
 And now it can be imported and used wherever we want. Hooray!
 
 With that being said we can go back to the `ProfileForm.js` and replace the inline ProfileCard in the render function with our new stateless functional component like so:
-```
+```javascript
 import ProfileCard from '../new/profileCard/ProfileCard';
 ...
 
@@ -206,7 +206,7 @@ Now `ProfileForm` is acting as the container and data provider for the `ProfileC
 One massive benefit of using stateless functional components is that they are just that; **functions!**
 As such we don't have to be concered with maintaining state. All we are interested in is *'Given a set of inputs (props) do we get the correct output'?'*
 Using [enzyme](https://github.com/airbnb/enzyme) to shallow mount the component we are testing and [chai](https://github.com/chaijs/chai) to make test assersions we can test all parts of `ProfileCard.js`. For example to test how `ProfileCard` renders the complement given the name prop is provided and not provided, we would have something like:
-```
+```javascript
 describe('profileCardComplement', () => {
   it('displays "Missing name..." if no name is given', () => {
     wrapper = shallow(<ProfileCard />);
