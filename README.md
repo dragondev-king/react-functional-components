@@ -1,10 +1,10 @@
 # react-functional-components-example
-Example project showing how a large component with both logic and design can be divided into reusable controller components and stateless functional presentational components
-It is not intended to be a complete project. It is instead inteded to highlight some core React development concepts for learning purposes.
+Example project showing how a large component with both logic and design can be divided into reusable controller components and stateless functional presentational components.
+It is not intended to be a complete project. It is instead intended to highlight some core React development concepts for learning purposes.
 
 ## Running locally
 
-1. pull master brach from https://github.com/RowanCarmichael/react-functional-components-example
+1. pull master branch from https://github.com/dragondev-king/react-functional-components
 
 2. in project folder run `yarn install` to install project dependencies
 
@@ -13,11 +13,11 @@ It is not intended to be a complete project. It is instead inteded to highlight 
 ## Running tests
 `yarn run test` runs all tests
 
-## Dividing to container and presentational components
+## Dividing into container and presentational components
 
-While it is entirely possible to create a React app in a single component, the general goal is to reduce components to a single purpose. By doing so they will be separating concerns, making them more reusable, and easier to test. This example project will be highlighting how a large component with both business and presentational logic can be divided into container components (whose job is to handle data and provide it to other components) and presentational components (stateless functional components which are only concerened with how this are displayed).
+While it is entirely possible to create a React app in a single component, the general goal is to reduce components to a single purpose. By doing so they will be separating concerns, making them more reusable, and easier to test. This example project will be highlighting how a large component with both business and presentational logic can be divided into container components (whose job is to handle data and provide it to other components) and presentational components (stateless functional components which are only concerned with how this is displayed).
 
-To start lets look at the first part of the old ProfileForm component which has been writen to contain the entire app as a single component.
+To start lets look at the first part of the old ProfileForm component which has been written to contain the entire app as a single component.
 ```javascript
 class ProfileForm extends React.Component {
   state = {
@@ -47,12 +47,12 @@ And other functions which have state changing logic as well as rendering logic.
     });
   }
 
-  renderComplement = () => {
-    let complement = 'Missing name...';
+  renderCompliment = () => {
+    let compliment = 'Missing name...';
     if (this.state.name) {
-      complement = 'Has a very cool name!';
+      compliment = 'Has a very cool name!';
     }
-    return <p id="profileCardComplement" className={styles.complement}>{complement}</p>;
+    return <p id="profileCardCompliment" className={styles.compliment}>{compliment}</p>;
   };
 ```
 Finally there is the render logic which has all the elements/components for the whole app.
@@ -88,7 +88,7 @@ Finally there is the render logic which has all the elements/components for the 
             />
             <div className={styles.nameSubContainer}>
               <p id="profileCardName" className={styles.name}>{this.state.name}</p>
-              {this.renderComplement()}
+              {this.renderCompliment()}
             </div>
           </div>
         </div>
@@ -96,9 +96,6 @@ Finally there is the render logic which has all the elements/components for the 
     );
   }
 ```
-Which should look something like this:
-
-![Profile Form Screenshot](screenshots/ProfileFormScreenshot.png?raw=true "Profile Form Screenshot")
 
 While this single component has everything working as intended, it isn't reusable. For instance we couldn't realistically pick this component up and use it in another project with a different purpose. It is too heavily tied to the context of this app.
 However it is possible that the profile card is something that could be reused across different apps. To do this we would need to refactor it out to it's own component. Which is exactly what we are going to do!
@@ -127,15 +124,15 @@ const ProfileCard = ({ name, icon, iconColor }) => {
 ```
 Now instead of accessing the props as we usually would in a regular React component like `this.props.name` we instead have a variable `name` that we can access directly.
 
-After moving over the rendering logic/styles and refactoring the state object to props. We now have a working stateless functional component:
+After moving over the rendering logic/styles and refactoring the state object to props, we now have a working stateless functional component:
 ```javascript
 const ProfileCard = ({ name, icon, iconColor }) => {
-  const renderComplement = () => {
-    let complement = 'Missing name...';
+  const renderCompliment = () => {
+    let compliment = 'Missing name...';
     if (name) {
-      complement = 'Has a very cool name!';
+      compliment = 'Has a very cool name!';
     }
-    return <p id="profileCardComplement" className={styles.complement}>{complement}</p>;
+    return <p id="profileCardCompliment" className={styles.compliment}>{compliment}</p>;
   };
 
   return (
@@ -144,14 +141,14 @@ const ProfileCard = ({ name, icon, iconColor }) => {
         <Avatar id="profileCardIcon" style={{ backgroundColor: iconColor }} icon={icon} />
         <div className={styles.nameSubContainer}>
           <p id="profileCardName" className={styles.name}>{name}</p>
-          {renderComplement()}
+          {renderCompliment()}
         </div>
       </div>
     </div>
   );
 };
 ```
-As we can see there is a function `renderComplement` within this stateless functional component. It's important to note that it is totally fine to include functions like these as long as they are only used for presentational logic. However with that being said it would arguably be more appropriate to have the `renderComplement` function refactored into its own stateess functional component. But just for this example we will leave it as is.
+As we can see there is a function `renderCompliment` within this stateless functional component. It's important to note that it is totally fine to include functions like these as long as they are only used for presentational logic. However with that being said it would arguably be more appropriate to have the `renderCompliment` function refactored into its own stateless functional component. But just for this example we will leave it as is.
 
 Now just before we start using this function elsewhere we should define the prop contract with any other component that wants to use this one. To do so we `import PropTypes from 'prop-types'` and then define the propTypes for this component:
 ```javascript
@@ -203,30 +200,29 @@ class ProfileForm extends React.Component {
 Now `ProfileForm` is acting as the container and data provider for the `ProfileCard`. `ProfileForm` maintains and manipulates the data required by `ProfileCard` so it doesn't have to worry about it itself.
 
 ## Testing a stateless functional components
-One massive benefit of using stateless functional components is that they are just that; **functions!**
-As such we don't have to be concered with maintaining state. All we are interested in is *'Given a set of inputs (props) do we get the correct output'?'*
-Using [enzyme](https://github.com/airbnb/enzyme) to shallow mount the component we are testing and [chai](https://github.com/chaijs/chai) to make test assersions we can test all parts of `ProfileCard.js`. For example to test how `ProfileCard` renders the complement given the name prop is provided and not provided, we would have something like:
+One massive benefit of using stateless functional components is that they are just that: **functions!**
+As such we don't have to be concerned with maintaining state. All we are interested in is *'Given a set of inputs (props) do we get the correct output'?'*
+For example to test how `ProfileCard` renders the compliment given the name prop is provided and not provided, we would have something like:
 ```javascript
-describe('profileCardComplement', () => {
+describe('profileCardCompliment', () => {
   it('displays "Missing name..." if no name is given', () => {
     wrapper = shallow(<ProfileCard />);
 
-    expect(wrapper.find('#profileCardComplement').text()).to.equal('Missing name...');
+    expect(wrapper.find('#profileCardCompliment').text()).to.equal('Missing name...');
   });
 
-  it('displays a complement if a name is given', () => {
+  it('displays a compliment if a name is given', () => {
     wrapper = shallow(<ProfileCard name="Rowan" />);
 
-    expect(wrapper.find('#profileCardComplement').text()).to.equal('Has a very cool name!');
+    expect(wrapper.find('#profileCardCompliment').text()).to.equal('Has a very cool name!');
   });
 });
 ```
 
 ### Helpful links
 * https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc
-* https://github.com/krasimir/react-in-patterns/blob/master/book/chapter-6/README.md
 
 ### Author
-[Rowan Carmichael](https://github.com/RowanCarmichael)
+[Kenji Nakamura](https://github.com/dragondev-king)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

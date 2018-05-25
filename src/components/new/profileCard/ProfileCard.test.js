@@ -13,17 +13,17 @@ describe('ProfileCard', () => {
     wrapper.unmount();
   });
 
-  describe('profileCardComplement', () => {
+  describe('profileCardCompliment', () => {
     it('displays "Missing name..." if no name is given', () => {
       wrapper = shallow(<ProfileCard icon="face" iconColor="red" />);
 
-      expect(wrapper.find('#profileCardComplement').text()).to.equal('Missing name...');
+      expect(wrapper.find('#profileCardCompliment').text()).to.equal('Missing name...');
     });
 
-    it('displays a complement if a name is given', () => {
+    it('displays a compliment if a name is given', () => {
       wrapper = shallow(<ProfileCard name="Rowan" icon="face" iconColor="red" />);
 
-      expect(wrapper.find('#profileCardComplement').text()).to.equal('Has a very cool name!');
+      expect(wrapper.find('#profileCardCompliment').text()).to.equal('Has a very cool name!');
     });
   });
 
