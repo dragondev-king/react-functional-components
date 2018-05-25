@@ -9,12 +9,12 @@ import styles from './ProfileCard.css';
 const ProfileCard = ({ name, icon, iconColor }) => {
   // Stateless functional components can include functions inside them as long as they are only for presentational logic
   // Arguably this could be refactored into its own stateless functional component
-  const renderComplement = () => {
-    let complement = 'Missing name...';
+  const renderCompliment = () => {
+    let compliment = 'Missing name...';
     if (name) {
-      complement = 'Has a very cool name!';
+      compliment = 'Has a very cool name!';
     }
-    return <p id="profileCardComplement" className={styles.complement}>{complement}</p>;
+    return <p id="profileCardCompliment" className={styles.compliment}>{compliment}</p>;
   };
 
   return (
@@ -23,7 +23,7 @@ const ProfileCard = ({ name, icon, iconColor }) => {
         <Avatar id="profileCardIcon" style={{ backgroundColor: iconColor }} icon={icon} />
         <div className={styles.nameSubContainer}>
           <p id="profileCardName" className={styles.name}>{name}</p>
-          {renderComplement()}
+          {renderCompliment()}
         </div>
       </div>
     </div>
