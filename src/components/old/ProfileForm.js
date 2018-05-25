@@ -49,12 +49,12 @@ class ProfileForm extends Component {
     });
   }
 
-  renderComplement = () => {
-    let complement = 'Missing name...';
+  renderCompliment = () => {
+    let compliment = 'Missing name...';
     if (this.state.name) {
-      complement = 'Has a very cool name!';
+      compliment = 'Has a very cool name!';
     }
-    return <p id="profileCardComplement" className={styles.complement}>{complement}</p>;
+    return <p id="profileCardCompliment" className={styles.compliment}>{compliment}</p>;
   };
 
   render() {
@@ -84,7 +84,7 @@ class ProfileForm extends Component {
             <Avatar id="profileCardIcon" style={{ backgroundColor: this.state.iconColor }} icon={this.state.iconList[this.state.iconIndex]} />
             <div className={styles.nameSubContainer}>
               <p id="profileCardName" className={styles.name}>{this.state.name}</p>
-              {this.renderComplement()}
+              {this.renderCompliment()}
             </div>
           </div>
         </div>
