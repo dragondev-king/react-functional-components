@@ -222,7 +222,4 @@ describe('profileCardCompliment', () => {
 ### Helpful links
 * https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc
 
-### Author
-[Kenji Nakamura](https://github.com/dragondev-king)
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
